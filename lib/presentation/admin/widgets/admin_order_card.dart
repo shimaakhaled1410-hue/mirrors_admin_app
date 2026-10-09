@@ -39,10 +39,7 @@ class AdminOrderCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(
-                  '#${order.orderId}',
-                  style: AppStyles.bold16(context),
-                ),
+                Text('#${order.orderId}', style: AppStyles.bold16(context)),
                 const SizedBox(width: 8),
                 Container(
                   padding: const EdgeInsets.symmetric(
@@ -94,29 +91,23 @@ class AdminOrderCard extends StatelessWidget {
             ),
             if (order.address != null && order.address!.isNotEmpty) ...[
               const SizedBox(height: 4),
-              Text(
-                order.address!,
-                style: AppStyles.regular12(context),
-              ),
+              Text(order.address!, style: AppStyles.regular12(context)),
             ],
             if (order.senderWalletNumber != null &&
                 order.senderWalletNumber!.isNotEmpty) ...[
               const SizedBox(height: 4),
               Text(
                 '${l10n.senderWalletLabel}: ${order.senderWalletNumber}',
-                style: AppStyles.regular12(context).copyWith(
-                  color: AppColors.accent,
-                ),
+                style: AppStyles.regular12(
+                  context,
+                ).copyWith(color: AppColors.accent),
               ),
             ],
             if (order.items.isNotEmpty) ...[
               const SizedBox(height: 12),
               const Divider(height: 1),
               const SizedBox(height: 10),
-              Text(
-                l10n.itemsSummary,
-                style: AppStyles.semiBold12(context),
-              ),
+              Text(l10n.itemsSummary, style: AppStyles.semiBold12(context)),
               const SizedBox(height: 6),
               ...order.items.map(
                 (item) => Padding(
@@ -196,7 +187,7 @@ class AdminOrderCard extends StatelessWidget {
                         const SizedBox(height: 2),
                         Text(
                           '${order.remainingAmount.toInt()} ${l10n.egp}',
-                          style:  AppStyles.bold14(context),
+                          style: AppStyles.bold14(context),
                         ),
                       ],
                     ),
@@ -209,8 +200,15 @@ class AdminOrderCard extends StatelessWidget {
               width: double.infinity,
               child: OutlinedButton.icon(
                 onPressed: onChangeStatus,
-                icon:const  Icon(Icons.edit_note_rounded, size: 18, color: Colors.white),
-                label: Text(l10n.changeStatus, style: AppStyles.semiBold14(context)),
+                icon: Icon(
+                  Icons.edit_note_rounded,
+                  size: 18,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+                label: Text(
+                  l10n.changeStatus,
+                  style: AppStyles.semiBold14(context),
+                ),
                 style: OutlinedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),

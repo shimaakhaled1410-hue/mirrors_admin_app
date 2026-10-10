@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mirrors_admin_app/presentation/admin/admin_orders_view.dart';
+import 'package:mirrors_admin_app/presentation/admin_main_shell_view.dart';
+import '../../presentation/admin/admin_orders_view.dart';
+import '../../presentation/production/admin_production_view.dart';
 
 abstract class AppRoutes {
   static const String main = '/';
@@ -17,7 +19,7 @@ final GoRouter appRouter = GoRouter(
   routes: [
     GoRoute(
       path: AppRoutes.main,
-      builder: (context, state) => const AdminOrdersView(),
+      builder: (context, state) => const AdminMainShellView(),
     ),
     GoRoute(
       path: AppRoutes.orders,
@@ -25,7 +27,7 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.production,
-      builder: (context, state) => const AdminOrdersView(),
+      builder: (context, state) => const AdminProductionView(),
     ),
   ],
 );

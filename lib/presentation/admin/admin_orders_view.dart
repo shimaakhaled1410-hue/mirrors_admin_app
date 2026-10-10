@@ -151,7 +151,7 @@ void _showSettingsDialog(BuildContext context) {
     builder: (ctx) {
       return BlocBuilder<AppSettingsCubit, AppSettingsState>(
         builder: (context, state) {
-          final isDark = state.themeMode == ThemeMode.dark;
+          final isDark = Theme.of(context).brightness == Brightness.dark;
           final isArabic = state.locale.languageCode == 'ar';
 
           return AlertDialog(

@@ -27,5 +27,7 @@
   "statusUpdateFailed": "فشل تحديث الحالة",
   "senderWalletLabel": "رقم المحفظة المحول منها",
   "statusDepositConfirmed": "تم تأكيد العربون",
-  "confirmDepositAction": "تأكيد استلام العربون"
+  "confirmDepositAction": "تأكيد استلام العربون",
+  "navOrders": "الطلبات",
+  "navProduction": "التصنيع والورشة"
 }

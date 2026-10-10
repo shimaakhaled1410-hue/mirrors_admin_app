@@ -92,4 +92,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirmDepositAction => 'Confirm Deposit Receipt';
+
+  @override
+  String get navOrders => 'Orders';
+
+  @override
+  String get navProduction => 'Production';
 }

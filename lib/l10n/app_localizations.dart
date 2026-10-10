@@ -265,6 +265,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm Deposit Receipt'**
   String get confirmDepositAction;
+
+  /// No description provided for @navOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get navOrders;
+
+  /// No description provided for @navProduction.
+  ///
+  /// In en, this message translates to:
+  /// **'Production'**
+  String get navProduction;
 }
 
 class _AppLocalizationsDelegate

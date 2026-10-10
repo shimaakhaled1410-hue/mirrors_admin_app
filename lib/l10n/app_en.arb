@@ -27,5 +27,7 @@
   "statusUpdateFailed": "Failed to update status",
   "senderWalletLabel": "Sender wallet number",
   "statusDepositConfirmed": "Deposit Confirmed",
-  "confirmDepositAction": "Confirm Deposit Receipt"
+  "confirmDepositAction": "Confirm Deposit Receipt",
+  "navOrders": "Orders",
+  "navProduction": "Production"
 }

@@ -92,4 +92,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get confirmDepositAction => 'تأكيد استلام العربون';
+
+  @override
+  String get navOrders => 'الطلبات';
+
+  @override
+  String get navProduction => 'التصنيع والورشة';
 }

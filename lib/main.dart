@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mirrors_admin_app/core/routing/app_router.dart';
 import 'package:mirrors_admin_app/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,7 +10,6 @@ import 'core/theme/app_theme.dart';
 import 'firebase_options.dart';
 import 'presentation/manager/app_settings/app_settings_cubit.dart';
 import 'presentation/manager/app_settings/app_settings_state.dart';
-import 'presentation/admin/admin_orders_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +33,7 @@ class MirrorsAdminApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppSettingsCubit, AppSettingsState>(
       builder: (context, state) {
-        return MaterialApp(
+        return MaterialApp.router(
           title: 'Mirrors Admin',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
@@ -47,7 +47,7 @@ class MirrorsAdminApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
-          home: const AdminOrdersView(),
+          routerConfig: appRouter,
         );
       },
     );

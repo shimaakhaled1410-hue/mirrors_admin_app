@@ -29,5 +29,15 @@
   "statusDepositConfirmed": "تم تأكيد العربون",
   "confirmDepositAction": "تأكيد استلام العربون",
   "navOrders": "الطلبات",
-  "navProduction": "التصنيع والورشة"
+  "navProduction": "التصنيع والورشة",
+  "productionTitle": "التصنيع والورشة",
+  "totalUnitsRequired": "إجمالي القطع المطلوبة",
+  "activeProductionOrders": "أوردرات قيد التنفيذ",
+  "noProductionOrders": "لا توجد أوردرات تصنيع معلقة حالياً",
+  "relatedOrders": "الطلبات التابعة",
+  "shareProductionSummary": "مشاركة أمر الشغل",
+  "productionSummaryHeader": "أمر تشغيل الورشة",
+  "framedMirrors": "مرايات بإطار",
+  "adhesiveMirrors": "مرايات لصق دبل",
+  "filterWithShelf": "مرايا برَف"
 }

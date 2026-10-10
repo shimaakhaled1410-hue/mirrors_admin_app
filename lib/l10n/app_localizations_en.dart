@@ -98,4 +98,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get navProduction => 'Production';
+
+  @override
+  String get productionTitle => 'Production & Workshop';
+
+  @override
+  String get totalUnitsRequired => 'Total Units';
+
+  @override
+  String get activeProductionOrders => 'Active Orders';
+
+  @override
+  String get noProductionOrders => 'No pending production orders';
+
+  @override
+  String get relatedOrders => 'Related Orders';
+
+  @override
+  String get shareProductionSummary => 'Share Production Summary';
+
+  @override
+  String get productionSummaryHeader => 'Workshop Production Plan';
+
+  @override
+  String get framedMirrors => 'Framed Mirrors';
+
+  @override
+  String get adhesiveMirrors => 'Double Adhesive Mirrors';
+
+  @override
+  String get filterWithShelf => 'With Shelf';
 }

@@ -277,6 +277,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Production'**
   String get navProduction;
+
+  /// No description provided for @productionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Production & Workshop'**
+  String get productionTitle;
+
+  /// No description provided for @totalUnitsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Units'**
+  String get totalUnitsRequired;
+
+  /// No description provided for @activeProductionOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Orders'**
+  String get activeProductionOrders;
+
+  /// No description provided for @noProductionOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'No pending production orders'**
+  String get noProductionOrders;
+
+  /// No description provided for @relatedOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Related Orders'**
+  String get relatedOrders;
+
+  /// No description provided for @shareProductionSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Production Summary'**
+  String get shareProductionSummary;
+
+  /// No description provided for @productionSummaryHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Workshop Production Plan'**
+  String get productionSummaryHeader;
+
+  /// No description provided for @framedMirrors.
+  ///
+  /// In en, this message translates to:
+  /// **'Framed Mirrors'**
+  String get framedMirrors;
+
+  /// No description provided for @adhesiveMirrors.
+  ///
+  /// In en, this message translates to:
+  /// **'Double Adhesive Mirrors'**
+  String get adhesiveMirrors;
+
+  /// No description provided for @filterWithShelf.
+  ///
+  /// In en, this message translates to:
+  /// **'With Shelf'**
+  String get filterWithShelf;
 }
 
 class _AppLocalizationsDelegate

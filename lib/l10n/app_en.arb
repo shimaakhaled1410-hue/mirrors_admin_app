@@ -29,5 +29,15 @@
   "statusDepositConfirmed": "Deposit Confirmed",
   "confirmDepositAction": "Confirm Deposit Receipt",
   "navOrders": "Orders",
-  "navProduction": "Production"
+  "navProduction": "Production",
+  "productionTitle": "Production & Workshop",
+  "totalUnitsRequired": "Total Units",
+  "activeProductionOrders": "Active Orders",
+  "noProductionOrders": "No pending production orders",
+  "relatedOrders": "Related Orders",
+  "shareProductionSummary": "Share Production Summary",
+  "productionSummaryHeader": "Workshop Production Plan",
+  "framedMirrors": "Framed Mirrors",
+  "adhesiveMirrors": "Double Adhesive Mirrors",
+  "filterWithShelf": "With Shelf"
 }

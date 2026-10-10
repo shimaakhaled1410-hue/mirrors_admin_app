@@ -98,4 +98,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get navProduction => 'التصنيع والورشة';
+
+  @override
+  String get productionTitle => 'التصنيع والورشة';
+
+  @override
+  String get totalUnitsRequired => 'إجمالي القطع المطلوبة';
+
+  @override
+  String get activeProductionOrders => 'أوردرات قيد التنفيذ';
+
+  @override
+  String get noProductionOrders => 'لا توجد أوردرات تصنيع معلقة حالياً';
+
+  @override
+  String get relatedOrders => 'الطلبات التابعة';
+
+  @override
+  String get shareProductionSummary => 'مشاركة أمر الشغل';
+
+  @override
+  String get productionSummaryHeader => 'أمر تشغيل الورشة';
+
+  @override
+  String get framedMirrors => 'مرايات بإطار';
+
+  @override
+  String get adhesiveMirrors => 'مرايات لصق دبل';
+
+  @override
+  String get filterWithShelf => 'مرايا برَف';
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mirrors_admin_app/l10n/app_localizations.dart';
-import 'package:mirrors_admin_app/presentation/manager/app_settings/app_settings_cubit.dart';
-import 'package:mirrors_admin_app/presentation/manager/app_settings/app_settings_state.dart';
 import '../../core/utils/whatsapp_helper.dart';
 import '../../data/models/order_ui_model.dart';
 import '../../data/services/orders_firestore_service.dart';
+import '../../l10n/app_localizations.dart';
+import '../manager/app_settings/app_settings_cubit.dart';
+import '../manager/app_settings/app_settings_state.dart';
 import 'widgets/admin_order_card.dart';
 import 'widgets/admin_order_filters_bar.dart';
 import 'widgets/admin_status_sheet.dart';
@@ -20,6 +20,14 @@ class AdminOrdersView extends StatefulWidget {
 class _AdminOrdersViewState extends State<AdminOrdersView> {
   final OrdersFirestoreService _firestoreService = OrdersFirestoreService();
   OrderStatus? _selectedStatus;
+
+  Map<OrderStatus?, int> _calculateCounts(List<OrderUiModel> orders) {
+    final Map<OrderStatus?, int> counts = {null: orders.length};
+    for (final status in OrderStatus.values) {
+      counts[status] = orders.where((o) => o.status == status).length;
+    }
+    return counts;
+  }
 
   void _showStatusSheet(OrderUiModel order) {
     showModalBottomSheet(
@@ -52,80 +60,86 @@ class _AdminOrdersViewState extends State<AdminOrdersView> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          AdminOrderFiltersBar(
-            selectedFilter: _selectedStatus,
-            onFilterSelected: (status) {
-              setState(() {
-                _selectedStatus = status;
-              });
-            },
-          ),
-          Expanded(
-            child: StreamBuilder<List<OrderUiModel>>(
-              stream: _firestoreService.getAllOrdersStream(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
+      body: StreamBuilder<List<OrderUiModel>>(
+        stream: _firestoreService.getAllOrdersStream(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-                if (snapshot.hasError) {
-                  return Center(child: Text('${snapshot.error}'));
-                }
+          if (snapshot.hasError) {
+            return Center(child: Text('${snapshot.error}'));
+          }
 
-                final allOrders = snapshot.data ?? [];
-                final orders = _selectedStatus == null
-                    ? allOrders
-                    : allOrders
-                          .where((order) => order.status == _selectedStatus)
-                          .toList();
+          final allOrders = snapshot.data ?? [];
+          final counts = _calculateCounts(allOrders);
+          final orders = _selectedStatus == null
+              ? allOrders
+              : allOrders
+                  .where((order) => order.status == _selectedStatus)
+                  .toList();
 
-                if (orders.isEmpty) {
-                  return Center(
-                    child: Text(
-                      l10n.noOrdersYet,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  );
-                }
-
-                return ListView.separated(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: orders.length,
-                  separatorBuilder: (_, _) => const SizedBox(height: 12),
-                  itemBuilder: (context, index) {
-                    final order = orders[index];
-                    return AdminOrderCard(
-                      order: order,
-                      onCall: () {
-                        if (order.phoneNumber != null &&
-                            order.phoneNumber!.isNotEmpty) {
-                          WhatsAppHelper.launchCall(
-                            order.phoneNumber!,
-                            context: context,
+          return Column(
+            children: [
+              AdminOrderFiltersBar(
+                selectedFilter: _selectedStatus,
+                onFilterSelected: (status) {
+                  setState(() {
+                    _selectedStatus = status;
+                  });
+                },
+                counts: counts,
+              ),
+              Expanded(
+                child: orders.isEmpty
+                    ? Center(
+                        child: Text(
+                          l10n.noOrdersYet,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      )
+                    : ListView.separated(
+                        padding: const EdgeInsets.all(16),
+                        itemCount: orders.length,
+                        separatorBuilder: (_, _) => const SizedBox(height: 12),
+                        itemBuilder: (context, index) {
+                          final order = orders[index];
+                          return AdminOrderCard(
+                            order: order,
+                            onCall: () {
+                              if (order.phoneNumber != null &&
+                                  order.phoneNumber!.isNotEmpty) {
+                                WhatsAppHelper.launchCall(
+                                  order.phoneNumber!,
+                                  context: context,
+                                );
+                              }
+                            },
+                            onWhatsApp: () {
+                              if (order.phoneNumber != null &&
+                                  order.phoneNumber!.isNotEmpty) {
+                                WhatsAppHelper.openWhatsApp(
+                                  order.phoneNumber!,
+                                  context: context,
+                                  customMessage:
+                                      'أهلاً بك يا ${order.customerName ?? 'عميلنا العزيز'} بخصوص طلبك رقم #${order.orderId}',
+                                );
+                              }
+                            },
+                            onChangeStatus: () => _showStatusSheet(order),
+                            onConfirmDeposit: () async {
+                              await _firestoreService.updateOrderStatus(
+                                order.orderId,
+                                OrderStatus.depositConfirmed,
+                              );
+                            },
                           );
-                        }
-                      },
-                      onWhatsApp: () {
-                        if (order.phoneNumber != null &&
-                            order.phoneNumber!.isNotEmpty) {
-                          WhatsAppHelper.openWhatsApp(
-                            order.phoneNumber!,
-                            context: context,
-                            customMessage:
-                                'أهلاً بك يا ${order.customerName ?? 'عميلنا العزيز'} بخصوص طلبك رقم #${order.orderId}',
-                          );
-                        }
-                      },
-                      onChangeStatus: () => _showStatusSheet(order),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ],
+                        },
+                      ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

@@ -9,6 +9,7 @@ class AdminOrderCard extends StatelessWidget {
   final VoidCallback onCall;
   final VoidCallback onWhatsApp;
   final VoidCallback onChangeStatus;
+  final VoidCallback? onConfirmDeposit;
 
   const AdminOrderCard({
     super.key,
@@ -16,12 +17,14 @@ class AdminOrderCard extends StatelessWidget {
     required this.onCall,
     required this.onWhatsApp,
     required this.onChangeStatus,
+    this.onConfirmDeposit,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isReceived = order.status == OrderStatus.received;
 
     return Card(
       elevation: 0,
@@ -100,7 +103,7 @@ class AdminOrderCard extends StatelessWidget {
                 '${l10n.senderWalletLabel}: ${order.senderWalletNumber}',
                 style: AppStyles.regular12(
                   context,
-                ).copyWith(color: AppColors.accent),
+                ).copyWith(color: AppColors.accent, fontWeight: FontWeight.bold),
               ),
             ],
             if (order.items.isNotEmpty) ...[
@@ -196,6 +199,24 @@ class AdminOrderCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 12),
+            if (isReceived && onConfirmDeposit != null) ...[
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  onPressed: onConfirmDeposit,
+                  icon: const Icon(Icons.check_circle_outline_rounded, size: 18),
+                  label: Text(l10n.confirmDepositAction),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: AppColors.accent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+            ],
             SizedBox(
               width: double.infinity,
               child: OutlinedButton.icon(
